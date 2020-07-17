@@ -8,17 +8,17 @@ public class MinSubsetSum {
 
         current = i = j = 0;
 
-        while(i < nums.length) {
+        while (i < nums.length) {
 
-            if(current < s){
-                if(j >= nums.length)
+            if (current < s) {
+                if (j >= nums.length)
                     break;
 
                 current += nums[j];
                 j++;
             }
 
-            if(current >= s){
+            if (current >= s) {
                 res = Math.min(res, j - i);
                 current -= nums[i];
                 i++;
@@ -26,7 +26,7 @@ public class MinSubsetSum {
 
         }
 
-        if(res == Integer.MAX_VALUE)
+        if (res == Integer.MAX_VALUE)
             return 0;
 
         return res;
@@ -36,7 +36,7 @@ public class MinSubsetSum {
     public static void main(String[] args) {
         MinSubsetSum ob = new MinSubsetSum();
 
-        int res = ob.minSubArrayLen(7, new int[]{2,3,1,2,4,3});
+        int res = ob.minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3});
         System.out.println("res: " + res);
 
     }

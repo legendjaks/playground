@@ -4,7 +4,7 @@ public class SubarrayProduct {
 
     public int numSubarrayProductLessThanK(int[] nums, int k) {
 
-        if(k == 0)
+        if (k == 0)
             return 0;
 
         int current, i, j;
@@ -13,20 +13,19 @@ public class SubarrayProduct {
         i = j = 0;
         current = 1;
 
-        while(i < nums.length) {
+        while (i < nums.length) {
 
-            if(current < k){
+            if (current < k) {
 
-                if(current > 1)
-                    res ++;
+                if (current > 1)
+                    res++;
 
-                if(j >= nums.length)
+                if (j >= nums.length)
                     break;
 
                 current *= nums[j];
                 j++;
-            }
-            else {
+            } else {
                 current /= nums[i];
                 i++;
             }

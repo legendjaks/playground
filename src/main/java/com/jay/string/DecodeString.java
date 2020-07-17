@@ -8,59 +8,58 @@ public class DecodeString {
 
         Stack<String> stack = new Stack<>();
 
-        for(char c: s.toCharArray()){
+        for (char c : s.toCharArray()) {
 
-            if(c == '['){
+            if (c == '[') {
                 int number = 0;
                 int pow = 1;
-                while(!stack.isEmpty()){
+                while (!stack.isEmpty()) {
                     String digit = stack.pop();
                     int n = numberOf(digit);
-                    if(n < 0){
+                    if (n < 0) {
                         stack.push(digit);
                         stack.push(String.valueOf(number));
                         stack.push(String.valueOf(c));
                         break;
-                    }else {
+                    } else {
                         number += n * pow;
                         pow *= 10;
                     }
                 }
 
-                if(stack.isEmpty()){
+                if (stack.isEmpty()) {
                     stack.push(String.valueOf(number));
                     stack.push(String.valueOf(c));
                 }
-            }
-            else if(c == ']'){
+            } else if (c == ']') {
 
                 StringBuilder text = new StringBuilder();
 
-                while(!stack.isEmpty()){
+                while (!stack.isEmpty()) {
 
                     String current = stack.pop();
-                    if(current.equals("[")){
+                    if (current.equals("[")) {
                         String digit = stack.pop();
                         int times = numberOf(digit);
 
                         String inner = text.toString();
                         StringBuilder sb = new StringBuilder();
-                        for(int i =0;i<times;i++){
+                        for (int i = 0; i < times; i++) {
                             sb.append(inner);
                         }
                         stack.push(sb.toString());
                         break;
-                    }else{
+                    } else {
                         text.insert(0, current);
                     }
                 }
-            }else{
+            } else {
                 stack.push(String.valueOf(c));
             }
         }
 
         StringBuilder res = new StringBuilder();
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
 
             String current = stack.pop();
             res.insert(0, current);
@@ -69,10 +68,10 @@ public class DecodeString {
         return res.toString();
     }
 
-    public int numberOf(String s){
-        try{
+    public int numberOf(String s) {
+        try {
             return Integer.parseInt(s);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return -1;
         }
     }

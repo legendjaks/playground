@@ -68,8 +68,8 @@ public class StoneGame {
 
             var opp_max = 0;
             var opp_steps = 0;
-            for(int om = 1; om <= 2*m; om++){
-                if(start + m <= end && (start+m+om <= end)) {
+            for (int om = 1; om <= 2 * m; om++) {
+                if (start + m <= end && (start + m + om <= end)) {
                     var current = stones[start + m][start + m + om - 1] + game(start + m + om, end, om * 2, stones, cache);
                     if (current > opp_max) {
                         opp_max = current;
@@ -78,7 +78,7 @@ public class StoneGame {
                 }
             }
 
-            var current = stones[start][start + m - 1] + game(start + m + opp_steps, end, opp_steps*2, stones, cache);
+            var current = stones[start][start + m - 1] + game(start + m + opp_steps, end, opp_steps * 2, stones, cache);
             max = Math.max(max, current);
         }
 
@@ -124,33 +124,32 @@ public class StoneGame {
 
         int n = piles.length;
         int[][] dp = new int[n][n];
-        int[] sums = new int[n+1];
+        int[] sums = new int[n + 1];
 
         // prefix sum
-        for (int i = 1; i <= n; i++) sums[i] = sums[i-1] + piles[i-1];
+        for (int i = 1; i <= n; i++) sums[i] = sums[i - 1] + piles[i - 1];
 
         // initial state: m = n-1, can just take all the stones from position i
-        for (int i = n-1; i >= 0 ; i--) dp[i][n-1] = sums[n] - sums[i];
+        for (int i = n - 1; i >= 0; i--) dp[i][n - 1] = sums[n] - sums[i];
 
         // initial state: i = n-1, with any m just take the last stone
-        for (int m = 1; m < n; m++) dp[n-1][m] = piles[n-1];
+        for (int m = 1; m < n; m++) dp[n - 1][m] = piles[n - 1];
 
         // loop from bottom right corner to top left corner of 2D array dp[][]
-        for (int i = n-2; i >= 0; i--) {
-            for (int m = n-2; m >= 1; m--) {
-                if (i + m*2 >= n) dp[i][m] = sums[n] - sums[i]; // A takes all the rest
-                else
-                {
+        for (int i = n - 2; i >= 0; i--) {
+            for (int m = n - 2; m >= 1; m--) {
+                if (i + m * 2 >= n) dp[i][m] = sums[n] - sums[i]; // A takes all the rest
+                else {
                     dp[i][m] = Integer.MIN_VALUE;
 
-                    for (int x = 1; x <= 2*m; x++) {
+                    for (int x = 1; x <= 2 * m; x++) {
 
-                        int scoreA = sums[i+x] - sums[i]; // A takes x stones from position i
+                        int scoreA = sums[i + x] - sums[i]; // A takes x stones from position i
                         int newM = Math.max(x, m);
                         int minLeft = Integer.MAX_VALUE; // the min score B leaves to A
 
-                        for (int y = 1; y <= 2*newM; y++) {
-                            int left = i+x+y < n ? dp[i+x+y][Math.max(newM,y)] : 0; // score that B leaves
+                        for (int y = 1; y <= 2 * newM; y++) {
+                            int left = i + x + y < n ? dp[i + x + y][Math.max(newM, y)] : 0; // score that B leaves
                             minLeft = Math.min(minLeft, left);
                         }
 

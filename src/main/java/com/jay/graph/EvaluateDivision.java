@@ -8,7 +8,7 @@ public class EvaluateDivision {
         String key;
         List<Edge> edges;
 
-        public Node(String key){
+        public Node(String key) {
             this.key = key;
             this.edges = new ArrayList<>();
         }
@@ -18,7 +18,7 @@ public class EvaluateDivision {
         Node node;
         double weight;
 
-        public Edge(Node node, double weight){
+        public Edge(Node node, double weight) {
             this.node = node;
             this.weight = weight;
         }
@@ -28,18 +28,18 @@ public class EvaluateDivision {
 
         Map<String, Node> nodes = new HashMap<>();
 
-        for(int index = 0; index < equations.size();index++) {
+        for (int index = 0; index < equations.size(); index++) {
 
             List<String> equation = equations.get(index);
             String source = equation.get(0);
             String dest = equation.get(1);
             double value = values[index];
 
-            if(!nodes.containsKey(source)){
+            if (!nodes.containsKey(source)) {
                 nodes.put(source, new Node(source));
             }
 
-            if(!nodes.containsKey(dest)){
+            if (!nodes.containsKey(dest)) {
                 nodes.put(dest, new Node(dest));
             }
 
@@ -47,13 +47,13 @@ public class EvaluateDivision {
             Node destNode = nodes.get(dest);
 
             sourceNode.edges.add(new Edge(destNode, value));
-            destNode.edges.add(new Edge(sourceNode, 1/value));
+            destNode.edges.add(new Edge(sourceNode, 1 / value));
         }
 
         double[] res = new double[queries.size()];
         Arrays.fill(res, -1.0);
 
-        for(int index = 0;index< queries.size(); index++){
+        for (int index = 0; index < queries.size(); index++) {
             List<String> query = queries.get(index);
             Node source = nodes.get(query.get(0));
             Node dest = nodes.get(query.get(1));
@@ -64,19 +64,19 @@ public class EvaluateDivision {
         return res;
     }
 
-    public double dfs(Node start, Node end, Map<String, Node> nodes, Set<Node> visited){
+    public double dfs(Node start, Node end, Map<String, Node> nodes, Set<Node> visited) {
 
-        if(start == null || end == null) return -1.0;
+        if (start == null || end == null) return -1.0;
 
         visited.add(start);
 
-        if(start == end) return 1.0;
+        if (start == end) return 1.0;
 
-        for(Edge edge: start.edges){
-            if(visited.contains(edge.node)) continue;
+        for (Edge edge : start.edges) {
+            if (visited.contains(edge.node)) continue;
 
             double value = dfs(edge.node, end, nodes, visited);
-            if(value > 0.0){
+            if (value > 0.0) {
                 return edge.weight * value;
             }
         }
@@ -92,7 +92,7 @@ public class EvaluateDivision {
         double[] values = {2.0, 3.0};
 
         double[] res = ob.calcEquation(equations, values, queries);
-        for(double value: res)
+        for (double value : res)
             System.out.print(value + ", ");
     }
 }

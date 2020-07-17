@@ -7,7 +7,7 @@ public class LongestSubarray {
     // [10,1,2,4,7,2] limit: 5
     public int longestSubarray(int[] nums, int limit) {
 
-        if(nums.length == 0)
+        if (nums.length == 0)
             return 0;
 
         int i = 0, j = 0;
@@ -16,26 +16,26 @@ public class LongestSubarray {
         int min = nums[0];
         int max = nums[0];
 
-        while(j < nums.length){
+        while (j < nums.length) {
 
-            if(i == j){
+            if (i == j) {
                 j++;
-            }else{
-                if(Math.abs(min - nums[j]) <= limit && Math.abs(max - nums[j]) <= limit){
+            } else {
+                if (Math.abs(min - nums[j]) <= limit && Math.abs(max - nums[j]) <= limit) {
                     len = Math.max(len, 1 + j - i);
                     min = Math.min(min, nums[j]);
                     max = Math.max(max, nums[j]);
                     j++;
-                }else{
+                } else {
                     i++;
                     min = nums[j];
                     max = nums[j];
-                    for(int index = j-1; index >= i; index--) {
+                    for (int index = j - 1; index >= i; index--) {
 
-                        if(Math.abs(min - nums[index]) <= limit && Math.abs(max - nums[index]) <= limit) {
+                        if (Math.abs(min - nums[index]) <= limit && Math.abs(max - nums[index]) <= limit) {
                             min = Math.min(min, nums[index]);
                             max = Math.max(max, nums[index]);
-                        }else{
+                        } else {
                             i = index + 1;
                             break;
                         }
@@ -53,7 +53,7 @@ public class LongestSubarray {
         int result = 0;
         int startPos = 0;
 
-        for (int i=0 ; i<nums.length ; ++i) {
+        for (int i = 0; i < nums.length; ++i) {
             while (!increasing.isEmpty() && nums[increasing.getLast()] > nums[i]) {
                 increasing.removeLast();
             }
@@ -70,7 +70,7 @@ public class LongestSubarray {
                     startPos = increasing.removeFirst() + 1;
                 }
             }
-            result = Math.max(result, i-startPos+1);
+            result = Math.max(result, i - startPos + 1);
         }
         return result;
     }
@@ -78,7 +78,7 @@ public class LongestSubarray {
     public static void main(String[] args) {
         LongestSubarray ob = new LongestSubarray();
         //int res = ob.longestSubarray2(new int[]{10,1,2,4,7,2}, 5);
-        int res = ob.longestSubarray2(new int[]{4,8,5,1,7,9}, 6);
+        int res = ob.longestSubarray2(new int[]{4, 8, 5, 1, 7, 9}, 6);
         System.out.println("res: " + res);
     }
 }

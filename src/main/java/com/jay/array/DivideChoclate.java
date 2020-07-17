@@ -1,8 +1,5 @@
 package com.jay.array;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class DivideChoclate {
 
     public int maximizeSweetness(int[] sweetness, int K) {

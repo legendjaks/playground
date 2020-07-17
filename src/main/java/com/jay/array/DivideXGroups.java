@@ -37,8 +37,8 @@ public class DivideXGroups {
 
     public int gcd(int a, int b) {
 
-        if( a < b ){
-            return (a == 0)? b : gcd(b % a, a);
+        if (a < b) {
+            return (a == 0) ? b : gcd(b % a, a);
         }
 
         return gcd(a % b, b);

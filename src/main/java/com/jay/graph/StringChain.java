@@ -42,7 +42,7 @@ public class StringChain {
         }
 
         int max = 0;
-        for (String word: words) {
+        for (String word : words) {
             //System.out.println(w);
             int res = findStrChain(word, patterns, wildcards);
             max = Math.max(max, res);
@@ -89,7 +89,7 @@ public class StringChain {
             StringBuilder sb = new StringBuilder();
             sb.append(input, 0, index);
             sb.append('*');
-            if(index < len)
+            if (index < len)
                 sb.append(input, index, len);
             res.add(sb.toString());
         }
@@ -115,7 +115,7 @@ public class StringChain {
     public static void main(String[] args) {
         StringChain ob = new StringChain();
         // ["ksqvsyq","ks","kss","czvh","zczpzvdhx","zczpzvh","zczpzvhx","zcpzvh","zczvh","gr","grukmj","ksqvsq","gruj","kssq","ksqsq","grukkmj","grukj","zczpzfvdhx","gru"]
-        int res = ob.longestStrChain(new String[]{"ksqvsyq","ks","kss","czvh","zczpzvdhx","zczpzvh","zczpzvhx","zcpzvh","zczvh","gr","grukmj","ksqvsq","gruj","kssq","ksqsq","grukkmj","grukj","zczpzfvdhx","gru"});
+        int res = ob.longestStrChain(new String[]{"ksqvsyq", "ks", "kss", "czvh", "zczpzvdhx", "zczpzvh", "zczpzvhx", "zcpzvh", "zczvh", "gr", "grukmj", "ksqvsq", "gruj", "kssq", "ksqsq", "grukkmj", "grukj", "zczpzfvdhx", "gru"});
         // ks, kss, kssq, ksqsq, ksqvsq, ksqvsyq
         // gr, gru, gruj, grukj, grukmj, grukkmj
         // czvh, zczvh, zcpzvh, zczpzvh, zczpzvhx, zczpzvdhx, zczpzfvdhx

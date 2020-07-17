@@ -15,7 +15,7 @@ class MyCalendar {
         Integer prev = bookings.floorKey(start);
         Integer next = bookings.ceilingKey(start);
 
-        if((prev == null || bookings.get(prev) <= start) && (next == null || end <= next)){
+        if ((prev == null || bookings.get(prev) <= start) && (next == null || end <= next)) {
             bookings.put(start, end);
             return true;
         }

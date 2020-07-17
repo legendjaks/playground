@@ -8,7 +8,7 @@ public class JumpGame {
         int index;
         int level;
 
-        public Item(int index, int level){
+        public Item(int index, int level) {
             this.index = index;
             this.level = level;
         }
@@ -18,9 +18,9 @@ public class JumpGame {
 
         Map<Integer, List<Integer>> graph = new HashMap<>();
 
-        for(int index = 0; index < arr.length; index++){
+        for (int index = 0; index < arr.length; index++) {
             int d = arr[index];
-            if(!graph.containsKey(d)){
+            if (!graph.containsKey(d)) {
                 graph.put(d, new ArrayList<>());
             }
 
@@ -32,36 +32,36 @@ public class JumpGame {
         Queue<Item> queue = new LinkedList<>();
         queue.offer(new Item(0, 0));
 
-        while(!queue.isEmpty()){
+        while (!queue.isEmpty()) {
 
             var current = queue.poll();
             visited.add(current.index);
-            if(current.index == arr.length - 1){
+            if (current.index == arr.length - 1) {
                 return current.level;
             }
 
-            if(current.index + 1 < arr.length && !visited.contains(current.index + 1)){
-                if(current.index + 1 == arr.length - 1){
+            if (current.index + 1 < arr.length && !visited.contains(current.index + 1)) {
+                if (current.index + 1 == arr.length - 1) {
                     return 1 + current.level;
                 }
 
                 queue.offer(new Item(current.index + 1, 1 + current.level));
             }
 
-            if(current.index - 1 >= 0 && !visited.contains(current.index - 1)){
+            if (current.index - 1 >= 0 && !visited.contains(current.index - 1)) {
                 queue.offer(new Item(current.index - 1, 1 + current.level));
             }
 
             var edges = graph.get(arr[current.index]);
-            if(edges == null) continue;
+            if (edges == null) continue;
 
-            for(int index = edges.size() - 1; index >=0; index--){
+            for (int index = edges.size() - 1; index >= 0; index--) {
 
-                if(edges.get(index) == arr.length - 1){
+                if (edges.get(index) == arr.length - 1) {
                     return 1 + current.level;
                 }
 
-                if(!visited.contains(edges.get(index))){
+                if (!visited.contains(edges.get(index))) {
                     queue.offer(new Item(edges.get(index), 1 + current.level));
                 }
             }

@@ -8,7 +8,7 @@ public class ValidSquare {
 
         int[][] points = new int[][]{p1, p2, p3, p4};
 
-        Arrays.sort(points, (p, q) -> (p[0] == q[0])? p[1] - q[1] : p[0] - q[0]);
+        Arrays.sort(points, (p, q) -> (p[0] == q[0]) ? p[1] - q[1] : p[0] - q[0]);
 
         return distance(points[0], points[1]) != 0
                 && distance(points[0], points[1]) == distance(points[0], points[2])
@@ -17,10 +17,10 @@ public class ValidSquare {
                 && distance(points[0], points[3]) == distance(points[1], points[2]);
     }
 
-    public int distance(int[] p, int[] q){
+    public int distance(int[] p, int[] q) {
         int d1 = p[0] - q[0];
         int d2 = p[1] - q[1];
-        return d1*d1 + d2*d2;
+        return d1 * d1 + d2 * d2;
     }
 
     public static void main(String[] args) {

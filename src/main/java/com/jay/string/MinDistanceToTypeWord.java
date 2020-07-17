@@ -18,7 +18,7 @@ public class MinDistanceToTypeWord {
         int[][] cost = new int[26][26];
         for (int i = 0; i < 26; i++) {
             for (int j = i; j < 26; j++) {
-                cost[i][j] = Math.abs(i/6 - j/6) + Math.abs(i%6 - j%6);
+                cost[i][j] = Math.abs(i / 6 - j / 6) + Math.abs(i % 6 - j % 6);
                 cost[j][i] = cost[i][j];
             }
         }
@@ -35,7 +35,7 @@ public class MinDistanceToTypeWord {
             int prev_key_cost = dp[keys[i - 1]];
             int current_cost = cost[keys[i - 1]][keys[i]];
             for (int j = 0; j < 26; j++) {
-                if(!set.contains(j)) continue;
+                if (!set.contains(j)) continue;
                 // lagging finger at j, leading finger at i - 1
                 // either of the two can move hence two options below
                 dp[j] = Math.min(

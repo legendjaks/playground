@@ -9,11 +9,11 @@ public class AllPathSrcDest {
 
     public boolean leadsToDestination(int n, int[][] edges, int source, int destination) {
 
-        if(edges.length == 0 && source == destination) return true;
+        if (edges.length == 0 && source == destination) return true;
 
         HashMap<Integer, HashSet<Integer>> graph = new HashMap<>();
 
-        for(var edge: edges){
+        for (var edge : edges) {
             var from = edge[0];
             var to = edge[1];
 
@@ -23,31 +23,31 @@ public class AllPathSrcDest {
         }
 
         var destEdges = graph.get(destination);
-        if(destEdges != null) return false;
+        if (destEdges != null) return false;
 
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(source);
 
         HashSet<Integer> visiting = new HashSet<>();
 
-        while(!queue.isEmpty()){
+        while (!queue.isEmpty()) {
 
             var current = queue.poll();
             visiting.add(current);
 
             var adjacents = graph.get(current);
-            if(adjacents == null) return false;
+            if (adjacents == null) return false;
 
-            if(adjacents.contains(current))
+            if (adjacents.contains(current))
                 return false;
 
-            for(var node: adjacents){
-                if(node == destination){
+            for (var node : adjacents) {
+                if (node == destination) {
                     visiting.clear();
                     continue;
                 }
 
-                if(visiting.contains(node)) return false;
+                if (visiting.contains(node)) return false;
                 queue.offer(node);
             }
         }
@@ -65,7 +65,7 @@ public class AllPathSrcDest {
         {{0,1},{0,3},{1,2},{2,1}}
         {{0,2},{0,1},{2,3},{1,3},{2,1}};
         */
-        boolean res = ob.leadsToDestination(1, edges,0, 0);
+        boolean res = ob.leadsToDestination(1, edges, 0, 0);
         System.out.println("res: " + res);
     }
 }

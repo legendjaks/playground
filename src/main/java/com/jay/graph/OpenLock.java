@@ -8,7 +8,7 @@ public class OpenLock {
         String key;
         int level;
 
-        public Item(String key, int level){
+        public Item(String key, int level) {
             this.key = key;
             this.level = level;
         }
@@ -19,22 +19,22 @@ public class OpenLock {
         Set<String> deadset = new HashSet<>(Arrays.asList(deadends));
         String start = "0000";
 
-        if(deadset.contains(start)) return -1;
+        if (deadset.contains(start)) return -1;
 
         Set<String> visited = new HashSet<>();
         Queue<Item> queue = new LinkedList<>();
 
         queue.offer(new Item(start, 0));
-        while(!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             Item current = queue.poll();
-            if(visited.contains(current.key))
+            if (visited.contains(current.key))
                 continue;
 
             visited.add(current.key);
 
             Set<String> edges = generatePossibleRotations(current.key, deadset);
-            for(String edge: edges){
-                if(edge.equals(target)){
+            for (String edge : edges) {
+                if (edge.equals(target)) {
                     return 1 + current.level;
                 }
 
@@ -45,13 +45,13 @@ public class OpenLock {
         return -1;
     }
 
-    public Set<String> generatePossibleRotations(String input, Set<String> deadends){
+    public Set<String> generatePossibleRotations(String input, Set<String> deadends) {
         int len = input.length();
         Set<String> res = new HashSet<>();
 
-        for(int index = 0; index< len; index++){
+        for (int index = 0; index < len; index++) {
             char[] digits = rotateDigit(input.charAt(index));
-            for(char digit:digits) {
+            for (char digit : digits) {
                 StringBuilder sb = new StringBuilder();
                 sb.append(input, 0, index);
                 sb.append(digit);
@@ -66,7 +66,7 @@ public class OpenLock {
         return res;
     }
 
-    public char[] rotateDigit(char c){
+    public char[] rotateDigit(char c) {
         char[] res = new char[2];
 
         res[0] = digitOf(c - 1);
@@ -75,18 +75,18 @@ public class OpenLock {
         return res;
     }
 
-    public char digitOf(int c){
-        if(c > '9') return (char)(c - 10);
-        if(c < '0') return (char)(c + 10);
+    public char digitOf(int c) {
+        if (c > '9') return (char) (c - 10);
+        if (c < '0') return (char) (c + 10);
 
-        return (char)c;
+        return (char) c;
     }
 
-    public String[] generateWildcardStrings(String input){
+    public String[] generateWildcardStrings(String input) {
         int len = input.length();
         String[] res = new String[len];
 
-        for(int index = 0; index< len; index++){
+        for (int index = 0; index < len; index++) {
             StringBuilder sb = new StringBuilder();
             sb.append(input, 0, index);
             sb.append('*');
@@ -99,8 +99,8 @@ public class OpenLock {
 
     public static void main(String[] args) {
         // ["0201","0101","0102","1212","2002"], target = "0202"
-        OpenLock ob  = new OpenLock();
-        int res = ob.openLock(new String[]{"0201","0101","0102","1212","2002"}, "0202");
+        OpenLock ob = new OpenLock();
+        int res = ob.openLock(new String[]{"0201", "0101", "0102", "1212", "2002"}, "0202");
         System.out.println("res: " + res);
         // "0000" -> "1000" -> "1100" -> "1200" -> "1201" -> "1202" -> "0202"
     }

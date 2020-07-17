@@ -11,7 +11,7 @@ public class ReOrderRoutesToZero {
         HashMap<Integer, HashSet<Integer>> graph = new HashMap<>();
         HashMap<Integer, HashSet<Integer>> adjacents = new HashMap<>();
 
-        for(var connection: connections){
+        for (var connection : connections) {
             var from = connection[0];
             var to = connection[1];
 
@@ -33,22 +33,22 @@ public class ReOrderRoutesToZero {
 
         queue.offer(0);
 
-        while(!queue.isEmpty()){
+        while (!queue.isEmpty()) {
 
             var current = queue.poll();
             visited.add(current);
 
             var adjacencies = adjacents.get(current);
-            for(var node: adjacencies){
-                if(visited.contains(node)) continue;
+            for (var node : adjacencies) {
+                if (visited.contains(node)) continue;
 
                 queue.offer(node);
 
-                if(graph.containsKey(node)){
+                if (graph.containsKey(node)) {
                     var edges = graph.get(node);
-                    if(!edges.contains(current))
-                        res ++;
-                }else
+                    if (!edges.contains(current))
+                        res++;
+                } else
                     res++;
             }
         }
@@ -59,7 +59,7 @@ public class ReOrderRoutesToZero {
     public static void main(String[] args) {
         ReOrderRoutesToZero ob = new ReOrderRoutesToZero();
         //int[][] connections = {{0,1},{1,3},{2,3},{4,0},{4,5}};
-        int[][] connections = {{1,0},{1,2},{3,2},{3,4}};
+        int[][] connections = {{1, 0}, {1, 2}, {3, 2}, {3, 4}};
         int res = ob.minReorder(6, connections);
         System.out.println("res: " + res);
     }

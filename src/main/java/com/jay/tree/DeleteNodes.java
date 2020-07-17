@@ -12,25 +12,25 @@ public class DeleteNodes {
 
         List<TreeNode> res = new ArrayList<>();
         TreeNode node = delete(root, deleteSet, res);
-        if(node != null)
+        if (node != null)
             res.add(node);
 
         return res;
     }
 
-    public TreeNode delete(TreeNode node, Set<Integer> deleteSet, List<TreeNode> res){
+    public TreeNode delete(TreeNode node, Set<Integer> deleteSet, List<TreeNode> res) {
 
-        if(node == null) return null;
+        if (node == null) return null;
 
         node.left = delete(node.left, deleteSet, res);
         node.right = delete(node.right, deleteSet, res);
 
-        if(deleteSet.contains(node.val)){
+        if (deleteSet.contains(node.val)) {
 
-            if(node.left != null)
+            if (node.left != null)
                 res.add(node.left);
 
-            if(node.right != null)
+            if (node.right != null)
                 res.add(node.right);
 
             return null;
@@ -40,7 +40,7 @@ public class DeleteNodes {
     }
 
     public static void main(String[] args) {
-        Integer[] data = new Integer[]{1,2,3,4,5,6,7};
+        Integer[] data = new Integer[]{1, 2, 3, 4, 5, 6, 7};
         TreeNode root = TreeUtils.build(data);
         //TreeUtils.printInOrder(root);
 

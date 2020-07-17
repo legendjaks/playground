@@ -1,9 +1,6 @@
 package com.jay.array;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class MinSubsetSumK {
     public int minSubArrayLen(int k, int[] nums) {
@@ -14,10 +11,10 @@ public class MinSubsetSumK {
         // when sum - k = 0, we need to count 1
         map.put(0, 1);
 
-        for(int num: nums){
+        for (int num : nums) {
 
             sum += num;
-            if(map.containsKey(sum - k)){
+            if (map.containsKey(sum - k)) {
                 count += map.get(sum - k);
             }
 
