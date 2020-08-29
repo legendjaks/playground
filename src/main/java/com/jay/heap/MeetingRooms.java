@@ -8,17 +8,8 @@ public class MeetingRooms {
 
     public int minMeetingRooms(int[][] intervals) {
 
-        Comparator<int[]> sorter = (a, b) -> {
-            return a[0] - b[0];
-        };
-
-        Comparator<int[]> arranger = (a, b) -> {
-            return a[1] - b[1];
-        };
-
-        Arrays.sort(intervals, sorter);
-
-        PriorityQueue<int[]> heap = new PriorityQueue<>(arranger);
+        Arrays.sort(intervals, (n1, n2) -> n1[0] - n2[0]);
+        PriorityQueue<int[]> heap = new PriorityQueue<>((n1, n2) -> n1[1] - n2[1]);
 
         int res = 0;
 

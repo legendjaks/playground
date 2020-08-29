@@ -1,30 +1,38 @@
 package com.jay.tree;
 
-import java.util.Stack;
+import java.util.TreeMap;
 
 public class MaxAnscestorDiff {
 
     public int maxAncestorDiff(TreeNode root) {
 
-        return maxHelper(root, new Stack<TreeNode>());
+        return maxHelper(root, new TreeMap<Integer, Integer>());
     }
 
-    public int maxHelper(TreeNode root, Stack<TreeNode> ancestors){
+    public int maxHelper(TreeNode root, TreeMap<Integer, Integer> ancestors){
 
         if(root == null)
             return 0;
 
-        ancestors.push(root);
+        int count = ancestors.getOrDefault(root.val, 0);
+        ancestors.put(root.val, 1 + count);
 
         int left = maxHelper(root.left, ancestors);
         int right = maxHelper(root.right, ancestors);
 
         int max = Math.max(left, right);
 
-        ancestors.pop();
+        if(count == 0) {
+            ancestors.remove(root.val);
+        }else{
+            ancestors.put(root.val, count);
+        }
 
-        for(TreeNode ancestor: ancestors){
-            var val = Math.abs(ancestor.val - root.val);
+        if(!ancestors.isEmpty()) {
+            var small = ancestors.firstKey();
+            var big = ancestors.lastKey();
+
+            var val = Math.max(Math.abs(small - root.val), Math.abs(big - root.val));
             max = Math.max(max, val);
         }
 
