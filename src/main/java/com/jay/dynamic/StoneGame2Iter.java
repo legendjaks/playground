@@ -1,91 +1,6 @@
 package com.jay.dynamic;
 
-import java.util.HashMap;
-import java.util.Objects;
-
-public class StoneGame {
-
-    public class Item {
-        int start;
-        int end;
-        int limit;
-
-        public Item(int start, int end, int limit) {
-            this.start = start;
-            this.end = end;
-            this.limit = limit;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Item item = (Item) o;
-            return start == item.start &&
-                    end == item.end &&
-                    limit == item.limit;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(start, end, limit);
-        }
-    }
-
-    public int stoneGameII(int[] piles) {
-
-        int length = piles.length;
-        int[][] stones = new int[length][length];
-
-        for (var len = 1; len <= length; len++) {
-            for (var i = 0; i < length - len + 1; i++) {
-                var j = i + len - 1;
-                stones[i][j] = piles[j];
-                if (j > 0)
-                    stones[i][j] += stones[i][j - 1];
-            }
-        }
-
-        var cache = new HashMap<Item, Integer>();
-
-        int res = game(0, length - 1, 2, stones, cache);
-        return res;
-    }
-
-    public int game(int start, int end, int limit, int[][] stones, HashMap<Item, Integer> cache) {
-
-        var key = new Item(start, end, limit);
-        if (cache.containsKey(key)) {
-            System.out.println("cache: [" + start + ", " + end + ", " + limit + "] = " + cache.get(key));
-            return cache.get(key);
-        }
-
-        if (start > end) return 0;
-        if ((end - start) <= limit) return stones[start][end];
-
-        var max = 0;
-        for (int m = 1; m <= limit; m++) {
-
-            var opp_max = 0;
-            var opp_steps = 0;
-            for (int om = 1; om <= 2 * m; om++) {
-                if (start + m <= end && (start + m + om <= end)) {
-                    var current = stones[start + m][start + m + om - 1] + game(start + m + om, end, om * 2, stones, cache);
-                    if (current > opp_max) {
-                        opp_max = current;
-                        opp_steps = om;
-                    }
-                }
-            }
-
-            var current = stones[start][start + m - 1] + game(start + m + opp_steps, end, opp_steps * 2, stones, cache);
-            max = Math.max(max, current);
-        }
-
-        cache.put(key, max);
-
-        return max;
-    }
+public class StoneGame2Iter {
 
     public int stoneGame(int[] piles) {
 
@@ -164,7 +79,7 @@ public class StoneGame {
 
     public static void main(String[] args) {
 
-        StoneGame ob = new StoneGame();
+        StoneGame2Iter ob = new StoneGame2Iter();
         int[] data = {3, 4, 5, 100};
         //int[] data = {1, 2, 3, 4, 5, 100};
         //int[] data = {2, 1, 5, 6, 7, 1, 2, 6, 7, 1, 2, 5, 6, 8, 3, 2, 5, 7, 8, 2, 3};

@@ -7,12 +7,12 @@ public class BinarySearch {
         int lo = 0;
         int hi = data.length - 1;
 
-        while(lo < hi){
+        while(lo <= hi){
             int mid = lo + (hi - lo)/2;
             if(data[mid] == x)
                 return mid;
             else if(data[mid] > x)
-                hi = mid;
+                hi = mid - 1;
             else
                 lo = mid + 1;
         }
@@ -21,10 +21,12 @@ public class BinarySearch {
     }
 
     public static void main(String[] args) {
-        int[] data = {2, 3, 5, 8, 11, 15, 20};
+        int[] data = {2, 3, 5, 8, 11, 15, 20, 25};
         BinarySearch ob = new BinarySearch();
-        int res = ob.search(data, 20);
-        System.out.println("res: " + res);
-    }
 
+        for(int d:data) {
+            int res = ob.search(data, d);
+            System.out.println(d + " - " + res);
+        }
+    }
 }
