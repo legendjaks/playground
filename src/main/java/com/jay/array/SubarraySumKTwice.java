@@ -20,23 +20,23 @@ public class SubarraySumKTwice {
             var current = find(arr, target, start, end);
             if (current[0] == -1) break;
 
-            if(stack.isEmpty()){
+            if (stack.isEmpty()) {
                 stack.push(current);
-            }else{
+            } else {
                 var prev = stack.peek();
-                if(current[0] < prev[0] + prev[1]){
-                    if(prev[1] > current[1]){
+                if (current[0] < prev[0] + prev[1]) {
+                    if (prev[1] > current[1]) {
                         stack.pop();
                         stack.push(current);
                     }
-                }else
+                } else
                     stack.push(current);
             }
 
             start = current[0] + 1;
         }
 
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             heap.offer(stack.pop()[1]);
         }
 
@@ -79,7 +79,7 @@ public class SubarraySumKTwice {
 
     public static void main(String[] args) {
 
-        int[] data = {1,1,1,2,2,2,4,4};
+        int[] data = {1, 1, 1, 2, 2, 2, 4, 4};
         SubarraySumKTwice ob = new SubarraySumKTwice();
         int res = ob.minSumOfLengths(data, 6);
         System.out.println("res: " + res);

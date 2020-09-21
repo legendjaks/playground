@@ -9,12 +9,12 @@ public class KClosestPoints {
 
         Queue<Integer> heap = new PriorityQueue<>((n1, n2) -> n2 - n1);
 
-        for(var point: points){
+        for (var point : points) {
             int distance = distance(point);
 
             heap.offer(distance);
 
-            if(heap.size() > K)
+            if (heap.size() > K)
                 heap.poll();
         }
 
@@ -24,10 +24,10 @@ public class KClosestPoints {
 
         int max = heap.poll();
 
-        for(var point:points){
+        for (var point : points) {
 
             int distance = distance(point);
-            if(distance <= max)
+            if (distance <= max)
                 res[pos++] = point;
         }
 
@@ -35,6 +35,6 @@ public class KClosestPoints {
     }
 
     public int distance(int[] point) {
-        return point[0]*point[0] + point[1]*point[1];
+        return point[0] * point[0] + point[1] * point[1];
     }
 }

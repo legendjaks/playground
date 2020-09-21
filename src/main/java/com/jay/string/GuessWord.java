@@ -15,34 +15,34 @@ public class GuessWord {
 
         int trials = 10;
 
-        while(trials > 0){
+        while (trials > 0) {
 
             int guess = random.nextInt(options.size());
             String candidate = options.get(guess);
             int count = master.guess(candidate);
-            if(count == 6){
+            if (count == 6) {
                 //System.out.println("Secret: " + candidate);
                 break;
             }
 
             List<String> nextOptions = new ArrayList<>();
-            for(var word: options){
-                if(countMatches(word, candidate) == count)
+            for (var word : options) {
+                if (countMatches(word, candidate) == count)
                     nextOptions.add(word);
             }
 
             options = nextOptions;
-            trials --;
+            trials--;
         }
     }
 
-    public int countMatches(String word1, String word2){
+    public int countMatches(String word1, String word2) {
 
         int size = Math.min(word1.length(), word2.length());
         int count = 0;
-        for(int index = 0; index < size; index++){
-            if(word1.charAt(index) == word2.charAt(index))
-                count ++;
+        for (int index = 0; index < size; index++) {
+            if (word1.charAt(index) == word2.charAt(index))
+                count++;
         }
 
         return count;
@@ -51,7 +51,7 @@ public class GuessWord {
     public class Master {
 
         public int guess(String word) {
-            System.out.println("Guess: "+ word);
+            System.out.println("Guess: " + word);
             return countMatches(word, "abcdef");
         }
     }

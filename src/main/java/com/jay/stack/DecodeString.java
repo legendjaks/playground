@@ -9,7 +9,7 @@ public class DecodeString {
         String data;
         boolean isNumber;
 
-        public Item(String data, boolean isNumber){
+        public Item(String data, boolean isNumber) {
             this.data = data;
             this.isNumber = isNumber;
         }
@@ -23,33 +23,33 @@ public class DecodeString {
         StringBuilder sb = new StringBuilder();
         int number = 0;
 
-        for(int index = 0; index < s.length(); index++){
+        for (int index = 0; index < s.length(); index++) {
 
             char c = s.charAt(index);
 
-            if(Character.isDigit(c)){
+            if (Character.isDigit(c)) {
 
-                if(sb.length() > 0){
+                if (sb.length() > 0) {
                     stack.push(new Item(sb.toString(), false));
                     sb = new StringBuilder();
                 }
 
                 number = number * 10 + (c - '0');
-            }else if(c == '['){
+            } else if (c == '[') {
                 stack.push(new Item(String.valueOf(number), true));
                 number = 0;
-            }else if(c == ']'){
+            } else if (c == ']') {
 
-                if(sb.length() > 0) {
+                if (sb.length() > 0) {
                     stack.push(new Item(sb.toString(), false));
                     sb = new StringBuilder();
                 }
 
-                while(!stack.isEmpty()) {
+                while (!stack.isEmpty()) {
                     Item top1 = stack.pop();
                     Item top2 = stack.pop();
 
-                    if(top2.isNumber) {
+                    if (top2.isNumber) {
                         StringBuilder temp = new StringBuilder();
 
                         int total = Integer.parseInt(top2.data);
@@ -59,11 +59,11 @@ public class DecodeString {
                         stack.push(new Item(temp.toString(), false));
 
                         break;
-                    }else{
+                    } else {
                         stack.push(new Item(top2.data + top1.data, false));
                     }
                 }
-            }else{
+            } else {
                 sb.append(c);
             }
         }
@@ -71,7 +71,7 @@ public class DecodeString {
         stack.push(new Item(sb.toString(), false));
 
         StringBuilder res = new StringBuilder();
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             res.insert(0, stack.pop().data);
         }
 

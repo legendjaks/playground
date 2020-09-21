@@ -7,9 +7,9 @@ public class MaxPathSum {
         return res.max;
     }
 
-    private Result helper(TreeNode root){
+    private Result helper(TreeNode root) {
 
-        if(root == null)
+        if (root == null)
             return new Result(Integer.MIN_VALUE, 0);
 
         var left = helper(root.left);
@@ -29,7 +29,7 @@ public class MaxPathSum {
         int max;
         int sum;
 
-        public Result(int max, int sum){
+        public Result(int max, int sum) {
             this.max = max;
             this.sum = sum;
         }

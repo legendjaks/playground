@@ -27,17 +27,17 @@ public class MovingAverage {
         index = index % n;
 
         len++;
-        if(len > n)
+        if (len > n)
             len = n;
 
-        return sum/len;
+        return sum / len;
     }
 
     public static void main(String[] args) {
         MovingAverage ob = new MovingAverage(3);
         int[] data = {1, 10, 3, 5};
 
-        for(int d: data){
+        for (int d : data) {
             var res = ob.next(d);
             System.out.println("res: " + res);
         }

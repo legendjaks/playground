@@ -3,11 +3,11 @@ package com.jay.array;
 public class SubarraySumK {
 
     // this works only if all values are +ve
-    public int[] find(int[] arr, int k){
+    public int[] find(int[] arr, int k) {
 
         int[] p = new int[arr.length + 1];
 
-        for(int index = 1; index < p.length; index ++){
+        for (int index = 1; index < p.length; index++) {
             p[index] = p[index - 1] + arr[index - 1];
         }
 
@@ -17,26 +17,26 @@ public class SubarraySumK {
         int len = Integer.MAX_VALUE;
         int pos = -1;
 
-        while(j < p.length){
+        while (j < p.length) {
 
             var sum = p[j] - p[i];
 
-            if(sum == k){
-                if(len > j - i) {
+            if (sum == k) {
+                if (len > j - i) {
                     len = j - i;
                     pos = i;
                 }
 
                 i = j;
                 j++;
-            }else if(sum < k){
+            } else if (sum < k) {
                 j++;
-            }else{
+            } else {
                 i++;
             }
         }
 
-        return (len == Integer.MAX_VALUE)? new int[]{ -1, -1 } : new int[]{ pos, len };
+        return (len == Integer.MAX_VALUE) ? new int[]{-1, -1} : new int[]{pos, len};
     }
 
     public static void main(String[] args) {

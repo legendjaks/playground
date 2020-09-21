@@ -1,6 +1,5 @@
 package com.jay.stack;
 
-import java.util.LinkedList;
 import java.util.Stack;
 
 public class SimpleExpressionEvaluation {
@@ -20,7 +19,7 @@ public class SimpleExpressionEvaluation {
             if (Character.isDigit(c)) {
                 number = number * 10 + (c - '0');
 
-                if(i < s.length() - 1)
+                if (i < s.length() - 1)
                     continue;
             }
 

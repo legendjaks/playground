@@ -1,16 +1,19 @@
 package com.jay.graph;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
 
 public class MinKnightMove {
 
     public int minKnightMoves(int x, int y) {
 
-        if(x < 0){
+        if (x < 0) {
             x = -x;
         }
 
-        if(y < 0){
+        if (y < 0) {
             y = -y;
         }
 
@@ -30,7 +33,7 @@ public class MinKnightMove {
             if (current[0] == x && current[1] == y) {
                 return current[2];
             }
-            if(visited.contains(current[0] + "-" + current[1]))
+            if (visited.contains(current[0] + "-" + current[1]))
                 continue;
 
             visited.add(current[0] + "-" + current[1]);
@@ -39,11 +42,11 @@ public class MinKnightMove {
                 int nx = current[0] + dx[i];
                 int ny = current[1] + dy[i];
 
-                if(nx < 0 || ny < 0 || nx > 300 || ny > 300)
+                if (nx < 0 || ny < 0 || nx > 300 || ny > 300)
                     continue;
 
                 String key = nx + "-" + ny;
-                if(visited.contains(key))
+                if (visited.contains(key))
                     continue;
 
                 queue.offer(new int[]{nx, ny, 1 + current[2]});

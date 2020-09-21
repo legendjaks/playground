@@ -9,9 +9,9 @@ public class MaxAnscestorDiff {
         return maxHelper(root, new TreeMap<Integer, Integer>());
     }
 
-    public int maxHelper(TreeNode root, TreeMap<Integer, Integer> ancestors){
+    public int maxHelper(TreeNode root, TreeMap<Integer, Integer> ancestors) {
 
-        if(root == null)
+        if (root == null)
             return 0;
 
         int count = ancestors.getOrDefault(root.val, 0);
@@ -22,13 +22,13 @@ public class MaxAnscestorDiff {
 
         int max = Math.max(left, right);
 
-        if(count == 0) {
+        if (count == 0) {
             ancestors.remove(root.val);
-        }else{
+        } else {
             ancestors.put(root.val, count);
         }
 
-        if(!ancestors.isEmpty()) {
+        if (!ancestors.isEmpty()) {
             var small = ancestors.firstKey();
             var big = ancestors.lastKey();
 

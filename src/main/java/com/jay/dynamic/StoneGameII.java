@@ -8,7 +8,7 @@ public class StoneGameII {
     public int stoneGameII(int[] piles) {
 
         int sum = 0;
-        for(int i = 0; i< piles.length; i++){
+        for (int i = 0; i < piles.length; i++) {
             sum += piles[i];
         }
 
@@ -17,12 +17,12 @@ public class StoneGameII {
         // findMaxScore = alex - bob => 2-7-9+4+4
 
         int[][] dp = new int[piles.length][piles.length];
-        for(int index = 0; index < piles.length; index++){
+        for (int index = 0; index < piles.length; index++) {
             Arrays.fill(dp[index], Integer.MAX_VALUE);
         }
 
         int delta = findMaxScore(piles, 0, 1, dp);
-        int score = (sum + delta)/2;
+        int score = (sum + delta) / 2;
 
         return score;
     }
@@ -33,23 +33,23 @@ public class StoneGameII {
         int n = piles.length;
         int score = Integer.MIN_VALUE;
 
-        if(index >= n){
+        if (index >= n) {
             return 0;
         }
 
-        if(dp[index][M] != Integer.MAX_VALUE){
+        if (dp[index][M] != Integer.MAX_VALUE) {
             System.out.println(index + "-" + M + ":" + dp[index][M]);
             return dp[index][M];
         }
 
         int sum = 0;
-        for(int i = 1; i <= 2*M; i++ ){
-            if(index + i > n){
+        for (int i = 1; i <= 2 * M; i++) {
+            if (index + i > n) {
                 break;
             }
 
             sum += piles[index + i - 1];
-            int nextM = Math.max(i,M);
+            int nextM = Math.max(i, M);
             int current = sum - findMaxScore(piles, index + i, nextM, dp);
             score = Math.max(score, current);
         }
@@ -62,7 +62,7 @@ public class StoneGameII {
     public static void main(String[] args) {
         StoneGameII ob = new StoneGameII();
         //int[] data = {2, 7, 9, 4, 4};
-        int[] data = {2, 7, 9, 4, 4, 1, 1,2,3,4,5};
+        int[] data = {2, 7, 9, 4, 4, 1, 1, 2, 3, 4, 5};
         int res = ob.stoneGameII(data);
         System.out.println("res: " + res);
     }

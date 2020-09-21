@@ -8,18 +8,18 @@ public class MakeValidParanthesis {
 
         Stack<String> stack = new Stack<>();
         StringBuilder running = new StringBuilder();
-        for(Character c: s.toCharArray()){
+        for (Character c : s.toCharArray()) {
 
-            if(c == ')'){
-                if(running.length() != 0){
+            if (c == ')') {
+                if (running.length() != 0) {
                     stack.push(running.toString());
                     running = new StringBuilder();
                 }
 
                 StringBuilder sb = new StringBuilder();
 
-                while(!stack.isEmpty()){
-                    if(stack.peek().equals("(")){
+                while (!stack.isEmpty()) {
+                    if (stack.peek().equals("(")) {
                         String top = stack.pop();
                         sb.insert(0, top);
                         sb.append(c);
@@ -30,28 +30,28 @@ public class MakeValidParanthesis {
                     sb.insert(0, top);
                 }
 
-                if(sb.length() != 0)
+                if (sb.length() != 0)
                     stack.push(sb.toString());
-            }else if (c == '('){
-                if(running.length() != 0){
+            } else if (c == '(') {
+                if (running.length() != 0) {
                     stack.push(running.toString());
                     running = new StringBuilder();
                 }
                 stack.push(String.valueOf(c));
-            }else{
+            } else {
                 running.append(c);
             }
         }
 
-        if(running.length() != 0){
+        if (running.length() != 0) {
             stack.push(running.toString());
         }
 
         StringBuilder res = new StringBuilder();
 
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             String top = stack.pop();
-            if(top.equals("("))
+            if (top.equals("("))
                 continue;
 
             res.insert(0, top);
